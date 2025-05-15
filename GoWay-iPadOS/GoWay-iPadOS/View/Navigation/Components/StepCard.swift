@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct StepCard: View {
-    
-    
+    var navigationStep : NavigationStep
     var body : some View {
         //TITLE
+        
         VStack {
-            Text("Starting Point")
+            Text(navigationStep.title)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.black)
                 .frame(width: 714, height: 27, alignment: .leading)
@@ -30,7 +30,7 @@ struct StepCard: View {
               .foregroundColor(.clear)
               .frame(width: 714, height: 366)
               .background(
-                Image("Hero Banner")
+                Image(navigationStep.imageName)
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(width: 714, height: 366)
@@ -44,6 +44,4 @@ struct StepCard: View {
     
 }
 
-#Preview {
-    StepCard()
-}
+

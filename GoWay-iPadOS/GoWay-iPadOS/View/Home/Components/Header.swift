@@ -8,32 +8,30 @@
 import SwiftUI
 
 struct Header: View {
-    @State private var searchText: String = ""
+    @Binding var searchText: String
+    @Binding var isSearching: Bool
     
     var body: some View {
-        
-            ZStack { //SEARCHBAR
-                VStack {
-                    Image("Hero Banner")
-                        .resizable()
-                        .scaledToFit()
-                        .ignoresSafeArea(edges: .all)
-                        .padding(.vertical, 0)
-                    
-                    Spacer()
-                }
+        ZStack { //SEARCHBAR
+            VStack {
+                Image("Hero Banner")
+                    .resizable()
+                    .scaledToFit()
+                    .ignoresSafeArea(edges: .all)
+                    .padding(.vertical, 0)
                 
-                VStack {
-                    SearchBar(searchText: $searchText)
-                    Spacer()
-                }
+                Spacer()
             }
-            .padding(.vertical, 1)
-        
-//        Spacer()
+            
+            VStack {
+                SearchBar(searchText: $searchText, isSearching: $isSearching)
+                Spacer()
+            }
+        }
+        .padding(.vertical, 1)
     }
 }
 
 #Preview {
-    Header()
+    Header(searchText: .constant(""), isSearching: .constant(false))
 }

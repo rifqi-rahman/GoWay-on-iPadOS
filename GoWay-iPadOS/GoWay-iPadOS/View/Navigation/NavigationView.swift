@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct NavigationView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Back button
             Button(action: {
-                //handle action back button
+                dismiss()
             }
             
             ) {
@@ -27,6 +29,7 @@ struct NavigationView: View {
                 }
             }
             .padding(.bottom, 24)
+          
           
             
             // Navigation title

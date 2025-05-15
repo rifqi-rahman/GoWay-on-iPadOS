@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct StepbyStepNavigation: View {
+    var navigationStep : [NavigationStep] = NavigationDataRestroom.getRestroomSteps()
+    
     var body: some View {
         ScrollView {
             VStack {
-                StepCard()
-                StepCard()
-                StepCard()
+                StepCard(navigationStep: navigationStep[0])
+                StepCard(navigationStep: navigationStep[1])
+                StepCard(navigationStep: navigationStep[2])
             }
         }
         .scrollIndicators(.hidden)

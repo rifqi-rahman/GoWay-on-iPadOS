@@ -1,8 +1,8 @@
 import SwiftUI
 
-
 struct SearchBar: View {
     @Binding var searchText: String
+    @Binding var isSearching: Bool
     
     var body: some View {
         VStack {
@@ -17,6 +17,20 @@ struct SearchBar: View {
                     .padding(10)
                     .foregroundColor(.gray)
                     .padding(.horizontal, 10)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                
+                // Clear button
+                if !searchText.isEmpty {
+                    Button(action: {
+                        searchText = ""
+                        isSearching = false
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 12)
+                    }
+                }
             }
             .frame(maxWidth: 600)
             .background(Color.white.opacity(1))
@@ -24,13 +38,10 @@ struct SearchBar: View {
             .shadow(radius: 5)
             .padding([.top, .horizontal], 19)
         }
-       
         Spacer()
     }
 }
 
-
-
 #Preview {
-    SearchBar(searchText: .constant(""))
+    SearchBar(searchText: .constant(""), isSearching: .constant(false))
 }
