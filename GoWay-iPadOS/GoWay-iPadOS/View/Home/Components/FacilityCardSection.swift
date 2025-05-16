@@ -60,7 +60,7 @@ struct FacilityCardSection: View {
                     .background(Color(red: 0.02, green: 0.39, blue: 0.13))
                     .cornerRadius(16)
                 
-                HStack(alignment: .center, spacing: 0) {
+                HStack(alignment: .top, spacing: 0) {
                     Spacer()
                     FacilityIcons(iconName: "figure.stand.dress.line.vertical.figure", iconTitle: "Restroom")
                     Spacer()
@@ -71,6 +71,8 @@ struct FacilityCardSection: View {
                     FacilityIcons(iconName: "door.french.open", iconTitle: "Auditorium")
                     Spacer()
                     FacilityIcons(iconName: "hands.and.sparkles.fill", iconTitle: "Prayer Room")
+                    Spacer()
+                    FacilityIcons(iconName: "headset", iconTitle: "Front Office")
                     Spacer()
                 }
             }

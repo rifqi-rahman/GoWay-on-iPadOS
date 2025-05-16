@@ -53,8 +53,14 @@ class NavigationDataRestroom: NavigationDataProvider {
             NavigationStep(
                 stepNumber: 5,
                 title: "Turn Right",
-                description: "Now, Turn Right",
+                description: "Now, You'll see the restroom's sign on the right",
                 imageName: "restroom_step5"
+            ),
+            NavigationStep(
+                stepNumber: 6,
+                title: "You're Arrived!",
+                description: "Now, Have a nice rest!",
+                imageName: ""
             )
         ]
     }
@@ -93,6 +99,12 @@ class NavigationDataShower: NavigationDataProvider {
                 title: "Turn Right",
                 description: "Now, Turn Right",
                 imageName: "shower_step5"
+            ),
+            NavigationStep(
+                stepNumber: 6,
+                title: "You're Arrived!",
+                description: "Now, Have a nice rest!",
+                imageName: ""
             )
         ]
     }

@@ -53,6 +53,8 @@ struct HomeView: View {
             
             // Search results overlay
             if isSearching {
+                Header(searchText: $searchText, isSearching: $isSearching)
+                
                 SearchResultsView(searchResults: filteredItems)
                     .transition(.move(edge: .top))
             }
