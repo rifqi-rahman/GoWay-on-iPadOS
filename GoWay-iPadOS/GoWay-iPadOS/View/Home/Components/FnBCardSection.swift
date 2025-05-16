@@ -11,26 +11,20 @@ struct FnBCardSection: View {
     private let fnbItems = SearchableItem.sampleData().filter { $0.category == .fnb }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Food & Beverages")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding(.leading, 0)
-                    .padding(.top, 16)
-                Spacer()
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Food & Beverages")
+                .font(.title2)
+                .fontWeight(.bold)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                HStack(spacing: 16) {
                     ForEach(fnbItems) { item in
                         LocationCard(item: item)
+                            .frame(width: 340, height: 230)
                     }
                 }
-                .padding(.leading, 0)
             }
         }
-        .padding(.leading, 24)
     }
 }
 

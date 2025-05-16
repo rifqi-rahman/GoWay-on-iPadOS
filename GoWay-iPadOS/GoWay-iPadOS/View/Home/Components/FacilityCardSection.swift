@@ -20,25 +20,22 @@ struct FacilityIcons: View {
         Button(action: {
             showNavigation = true
         }) {
-            VStack {
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 80, height: 80)
-                        .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                        .cornerRadius(64)
-                    
-                    Image(systemName: iconName)
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(Color(red: 0.02, green: 0.39, blue: 0.13))
-                }
-                .frame(width: 80, height: 90)
+            VStack(spacing: 12) {
+                Circle()
+                    .fill(Color(red: 0.96, green: 0.96, blue: 0.96))
+                    .frame(width: 64, height: 64)
+                    .overlay(
+                        Image(systemName: iconName)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(Color(red: 0.02, green: 0.39, blue: 0.13))
+                    )
                 
                 Text(iconTitle)
-                    .font(Font.custom("SF Pro Display", size: 18))
+                    .font(.system(size: 16))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                    .frame(width: 93, alignment: .top)
+                    .frame(maxWidth: 80)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .buttonStyle(.plain)
@@ -50,34 +47,38 @@ struct FacilityIcons: View {
 
 struct FacilityCardSection: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("Facility")
                 .font(.title2)
                 .fontWeight(.bold)
+                .padding(.bottom, 14)
             
             ZStack {
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 800, height: 220)
+                    .frame(height: 220)
                     .background(Color(red: 0.02, green: 0.39, blue: 0.13))
                     .cornerRadius(16)
                 
-                HStack(alignment: .top, spacing: 65) {
+                HStack(alignment: .center, spacing: 0) {
+                    Spacer()
                     FacilityIcons(iconName: "figure.stand.dress.line.vertical.figure", iconTitle: "Restroom")
+                    Spacer()
                     FacilityIcons(iconName: "shower.fill", iconTitle: "Shower Room")
+                    Spacer()
                     FacilityIcons(iconName: "car.fill", iconTitle: "Parking Area")
+                    Spacer()
                     FacilityIcons(iconName: "door.french.open", iconTitle: "Auditorium")
+                    Spacer()
                     FacilityIcons(iconName: "hands.and.sparkles.fill", iconTitle: "Prayer Room")
+                    Spacer()
                 }
             }
-            .padding(0)
         }
-        .frame(width: 811)
-        .padding(.leading, 24)
-        Spacer()
     }
 }
 
 #Preview {
     FacilityCardSection()
+        .frame(height: 300)
 }

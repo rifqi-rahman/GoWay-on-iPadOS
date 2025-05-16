@@ -27,15 +27,25 @@ struct HomeView: View {
         ZStack {
             // Main content
             ScrollView {
-                VStack {
+                VStack(spacing: 0) {
                     Header(searchText: $searchText, isSearching: $isSearching)
+                    
                     if !isSearching {
-                        HStack(alignment: .top) {
-                            FacilityCardSection()
-                            FeaturedCard()
+                        VStack(alignment: .leading, spacing: 32) {
+                            // Facility and Featured section
+                            HStack(alignment: .top, spacing: 24) {
+                                FacilityCardSection()
+                                FeaturedCard()
+                            }
+                            
+                            // Office section
+                            OfficeCardSection()
+                            
+                            // F&B section
+                            FnBCardSection()
                         }
-                        OfficeCardSection()
-                        FnBCardSection()
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 24)
                     }
                 }
             }

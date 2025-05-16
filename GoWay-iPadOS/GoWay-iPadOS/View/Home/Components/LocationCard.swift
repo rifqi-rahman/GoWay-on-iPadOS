@@ -5,53 +5,53 @@ struct LocationCard: View {
     @State private var showNavigation = false
     
     var body: some View {
-        Button(action: {
-            showNavigation = true
-        }) {
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 340, height: 230)
-                    .background(
-                        LinearGradient(
-                            stops: [
-                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.9), location: 0.00),
-                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.23), location: 0.74),
-                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0), location: 1.00),
-                            ],
-                            startPoint: UnitPoint(x: 0.5, y: 1),
-                            endPoint: UnitPoint(x: 0.5, y: 0.26)
+        GeometryReader { geometry in
+            Button(action: {
+                showNavigation = true
+            }) {
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(height: geometry.size.height)
+                        .background(
+                            LinearGradient(
+                                stops: [
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.9), location: 0.00),
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.23), location: 0.74),
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0), location: 1.00),
+                                ],
+                                startPoint: UnitPoint(x: 0.5, y: 1),
+                                endPoint: UnitPoint(x: 0.5, y: 0.26)
+                            )
                         )
-                    )
-                    .background(
-                        Image(item.imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 340)
-                            .clipped()
-                    )
-                    .cornerRadius(21)
-                    .padding(4)
-                
-                VStack {
-                    Spacer()
+                        .background(
+                            Image(item.imageName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(maxWidth: .infinity)
+                                .clipped()
+                        )
+                        .cornerRadius(21)
                     
-                    Category(categoryName: item.category.rawValue, categoryColor: getCategoryColor(for: item.category))
-                        .frame(width: 340, alignment: .bottomLeading)
-                    
-                    Text(item.name)
-                        .font(Font.custom("Bebas Neue", size: 32))
-                        .foregroundColor(.white)
-                        .padding(.leading, 24)
-                        .padding(.bottom, 20)
-                        .frame(width: 340, alignment: .leading)
+                    VStack {
+                        Spacer()
+                        
+                        Category(categoryName: item.category.rawValue, categoryColor: getCategoryColor(for: item.category))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(item.name)
+                            .font(Font.custom("Bebas Neue",size: min(geometry.size.width * 0.1, 32)))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, geometry.size.width * 0.07)
+                            .padding(.bottom, geometry.size.height * 0.09)
+                    }
                 }
-                .frame(width: 340, height: 230)
             }
-        }
-        .buttonStyle(.plain)
-        .fullScreenCover(isPresented: $showNavigation) {
-            NavigationView(item: item)
+            .buttonStyle(.plain)
+            .fullScreenCover(isPresented: $showNavigation) {
+                NavigationView(item: item)
+            }
         }
     }
     
@@ -80,4 +80,5 @@ struct LocationCard: View {
 
 #Preview {
     LocationCard(item: SearchableItem.sampleData().first!)
+        .frame(width: 340, height: 230)
 } 
