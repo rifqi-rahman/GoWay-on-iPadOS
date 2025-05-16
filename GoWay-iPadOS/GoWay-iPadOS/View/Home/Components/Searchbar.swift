@@ -3,6 +3,7 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var searchText: String
     @Binding var isSearching: Bool
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         VStack {
@@ -14,17 +15,22 @@ struct SearchBar: View {
                 
                 // Text Field
                 TextField("Office, Toilet, Restaurant...", text: $searchText)
+                    .focused($isFocused)
                     .padding(10)
                     .foregroundColor(.gray)
                     .padding(.horizontal, 10)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
+                    .onAppear {
+                        isFocused = true
+                    }
                 
                 // Clear button
                 if !searchText.isEmpty {
                     Button(action: {
                         searchText = ""
                         isSearching = false
+                        isFocused = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.gray)

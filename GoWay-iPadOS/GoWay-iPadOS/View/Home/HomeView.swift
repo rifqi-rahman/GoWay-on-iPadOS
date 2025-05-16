@@ -26,9 +26,10 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        if !isSearching {
+                // Main content
+                if !isSearching {
+                    ScrollView {
+                        VStack(spacing: 0) {
                             Header(searchText: $searchText, isSearching: $isSearching)
                             
                             VStack(alignment: .leading, spacing: 32) {
@@ -47,15 +48,13 @@ struct HomeView: View {
                             .padding(.horizontal, 24)
                         }
                     }
-                }
-                
-                if isSearching {
+                } else {
+                    // Search view
                     VStack(spacing: 0) {
                         SearchBar(searchText: $searchText, isSearching: $isSearching)
                         
                         ScrollView {
                             SearchResultsView(searchResults: filteredItems)
-                                .transition(.opacity)
                         }
                     }
                     .background(Color(UIColor.systemBackground))
@@ -66,9 +65,7 @@ struct HomeView: View {
             }
         }
         .onChange(of: searchText) { oldValue, newValue in
-            withAnimation {
-                isSearching = !newValue.isEmpty
-            }
+            isSearching = !newValue.isEmpty
         }
     }
 }
