@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct StepbyStepNavigation: View {
-    var navigationStep : [NavigationStep] = NavigationDataRestroom.getRestroomSteps()
+    let navigationStep: [NavigationStep]
     
     var body: some View {
         ScrollView {
-            VStack {
-                StepCard(navigationStep: navigationStep[0])
-                StepCard(navigationStep: navigationStep[1])
-                StepCard(navigationStep: navigationStep[2])
+            VStack(spacing: 16) {
+                ForEach(navigationStep) { step in
+                    StepCard(navigationStep: step)
+                }
             }
         }
         .scrollIndicators(.hidden)
@@ -23,5 +23,5 @@ struct StepbyStepNavigation: View {
 }
 
 #Preview {
-    StepbyStepNavigation()
+    StepbyStepNavigation(navigationStep: NavigationDataRestroom.getNavigationSteps())
 }

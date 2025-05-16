@@ -2,67 +2,75 @@ import SwiftUI
 
 struct SearchResultCard: View {
     let item: SearchableItem
+    @State private var showNavigation = false
     
     var body: some View {
-        ZStack {
-            
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(height: 300)
-                .background(
-                    LinearGradient(
-                        stops: [
-                            Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.9), location: 0.00),
-                            Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.23), location: 0.74),
-                            Gradient.Stop(color: getGradientColor(for: item.category).opacity(0), location: 1.00),
-                        ],
-                        startPoint: UnitPoint(x: 0.14, y: 0.5),
-                        endPoint: UnitPoint(x: 0.88, y: 0.5)
+        Button(action: {
+            showNavigation = true
+        }) {
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(height: 300)
+                    .background(
+                        LinearGradient(
+                            stops: [
+                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.9), location: 0.00),
+                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.23), location: 0.74),
+                                Gradient.Stop(color: getGradientColor(for: item.category).opacity(0), location: 1.00),
+                            ],
+                            startPoint: UnitPoint(x: 0.14, y: 0.5),
+                            endPoint: UnitPoint(x: 0.88, y: 0.5)
+                        )
                     )
-                )
-                .background(
-                    Image(item.imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                )
-                .cornerRadius(16)
-            
-            HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    // Category pill
-                    Text(item.category.rawValue)
-                        .font(.system(size: 14))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
-                        .background(getCategoryColor(for: item.category))
-                        .cornerRadius(33)
-                    
-                    // Title
-                    Text(item.name)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
-                    
-                    // Description
-                    Text(item.description)
-                        .font(.system(size: 14))
-                        .foregroundColor(.white.opacity(0.8))
-                        .lineLimit(2)
-                }
-                .padding(.leading, 20)
+                    .background(
+                        Image(item.imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                    )
+                    .cornerRadius(16)
                 
-                Spacer()
-                
-                // Operating hours
-                VStack(alignment: .trailing) {
-                    Image(systemName: "clock")
-                        .foregroundColor(.white)
-                    Text(item.operatingHours)
-                        .font(.system(size: 14))
-                        .foregroundColor(.white)
+                HStack {
+                    VStack(alignment: .leading, spacing: 8) {
+                        // Category pill
+                        Text(item.category.rawValue)
+                            .font(.system(size: 14))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(getCategoryColor(for: item.category))
+                            .cornerRadius(33)
+                        
+                        // Title
+                        Text(item.name)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.white)
+                        
+                        // Description
+                        Text(item.description)
+                            .font(.system(size: 14))
+                            .foregroundColor(.white.opacity(0.8))
+                            .lineLimit(2)
+                    }
+                    .padding(.leading, 20)
+                    
+                    Spacer()
+                    
+                    // Operating hours
+                    VStack(alignment: .trailing) {
+                        Image(systemName: "clock")
+                            .foregroundColor(.white)
+                        Text(item.operatingHours)
+                            .font(.system(size: 14))
+                            .foregroundColor(.white)
+                    }
+                    .padding(.trailing, 20)
                 }
-                .padding(.trailing, 20)
             }
+        }
+        .buttonStyle(.plain)
+        .fullScreenCover(isPresented: $showNavigation) {
+            NavigationView(item: item)
         }
     }
     

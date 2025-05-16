@@ -9,15 +9,14 @@ import SwiftUI
 
 struct NavigationView: View {
     @Environment(\.dismiss) private var dismiss
+    let item: SearchableItem
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Back button
             Button(action: {
                 dismiss()
-            }
-            
-            ) {
+            }) {
                 HStack(spacing: 8) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 20, weight: .semibold))
@@ -29,8 +28,6 @@ struct NavigationView: View {
                 }
             }
             .padding(.bottom, 24)
-          
-          
             
             // Navigation title
             Text("You're navigating to :")
@@ -40,24 +37,19 @@ struct NavigationView: View {
             // Main content: NavImageCard on left, StepByStepNavigation on right
             HStack(alignment: .top, spacing: 24) {
                 // LEFT PANEL - Sticky NavImageCard
-                NavImageCard()
-                
-                // FLEXIBLE-ADJUSTABLE DASHED LINE FOR PROGRESS LINE
-                
+                NavImageCard(item: item)
                 
                 // RIGHT PANEL - Scrollable StepByStepNavigation
-                 StepbyStepNavigation()
-                
+                StepbyStepNavigation(navigationStep: NavigationDataManager.getNavigationSteps(for: item))
             }
         }
         .ignoresSafeArea(edges: .all)
-        .frame(width: .infinity, height: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 0)
         .padding(.top, 16)
-        
     }
 }
 
 #Preview {
-    NavigationView()
+    NavigationView(item: SearchableItem.sampleData().first!)
 }

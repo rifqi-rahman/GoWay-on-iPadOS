@@ -54,6 +54,8 @@ struct OfficeCard: View {
 }
 
 struct OfficeCardSection: View {
+    private let officeItems = SearchableItem.sampleData().filter { $0.category == .office }
+    
     var body: some View {
         VStack {
             HStack {
@@ -61,35 +63,22 @@ struct OfficeCardSection: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.leading, 0)
-                    .padding(.top,16)
+                    .padding(.top, 16)
                 Spacer()
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    OfficeCard()
-                    
-                        }
-                .padding(.leading, 0)
+                    ForEach(officeItems) { item in
+                        LocationCard(item: item)
                     }
                 }
-        .padding(.leading, 24)
+                .padding(.leading, 0)
             }
-        
-        
+        }
+        .padding(.leading, 24)
     }
-
+}
 
 #Preview {
     OfficeCardSection()

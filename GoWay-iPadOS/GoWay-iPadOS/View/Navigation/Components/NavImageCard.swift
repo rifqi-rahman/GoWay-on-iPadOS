@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NavImageCard: View {
+    let item: SearchableItem
+    
     var body: some View {
         ZStack {
             // WHITE CARD IN THE BACK
@@ -24,8 +26,8 @@ struct NavImageCard: View {
             VStack(spacing: 0) {
                 // IMAGE SECTION WITH OVERLAY
                 ZStack(alignment: .bottomLeading) {
-                    // Image with green overlay
-                    Image("Hero Banner") // Replace with your image
+                    // Image with overlay
+                    Image(item.imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 470, height: 414)
@@ -33,9 +35,9 @@ struct NavImageCard: View {
                         .overlay(
                             LinearGradient(
                                 stops: [
-                                    Gradient.Stop(color: Color(red: 0, green: 0.43, blue: 0.13).opacity(0.9), location: 0.00),
-                                    Gradient.Stop(color: Color(red: 0.17, green: 0.83, blue: 0.31).opacity(0.23), location: 0.74),
-                                    Gradient.Stop(color: Color(red: 0.18, green: 0.85, blue: 0.32).opacity(0), location: 1.00),
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.9), location: 0.00),
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0.23), location: 0.74),
+                                    Gradient.Stop(color: getGradientColor(for: item.category).opacity(0), location: 1.00),
                                 ],
                                 startPoint: UnitPoint(x: 0.5, y: 1),
                                 endPoint: UnitPoint(x: 0.5, y: 0.26)
@@ -45,15 +47,15 @@ struct NavImageCard: View {
                     // Category and title
                     VStack(alignment: .leading, spacing: 8) {
                         // Category pill
-                        Text("Facility")
+                        Text(item.category.rawValue)
                             .font(.system(size: 16))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 6)
-                            .background(Color(red: 0.56, green: 0.93, blue: 0.56))
+                            .background(getCategoryColor(for: item.category))
                             .cornerRadius(33)
                         
                         // Title
-                        Text("RESTROOM")
+                        Text(item.name.uppercased())
                             .font(Font.custom("Bebas Neue", size: 48).weight(.bold))
                             .foregroundColor(.white)
                     }
@@ -73,40 +75,44 @@ struct NavImageCard: View {
                 
                 // INFORMATION SECTION
                 VStack(spacing: 24) {
-                    // Opening hours
+                    // Operating hours
                     HStack {
                         Image(systemName: "clock")
                             .font(.system(size: 24))
                         
-                        Text("08:00 - 21:00")
+                        Text(item.operatingHours)
                             .font(.system(size: 20))
                     }
                     
                     // Accessibility icons
-                    HStack(spacing: 40) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.green.opacity(0.2))
-                                .frame(width: 40, height: 40)
+                    if item.category == .facility {
+                        HStack(spacing: 40) {
+                            if item.hasWheelchairAccess == true {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.green.opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                    
+                                    Image(systemName: "figure.roll")
+                                        .font(.system(size: 20))
+                                }
+                            }
                             
-                            Image(systemName: "figure.roll")
-                                .font(.system(size: 20))
-                            
-                        }
-                        
-                        ZStack {
-                            Circle()
-                                .fill(Color.green.opacity(0.2))
-                                .frame(width: 40, height: 40)
-                            
-                            Image(systemName: "p.square.fill")
-                                .font(.system(size: 20))
+                            if item.hasParking == true {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.green.opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                    
+                                    Image(systemName: "p.square.fill")
+                                        .font(.system(size: 20))
+                                }
+                            }
                         }
                     }
                     
-                    
                     // Description
-                    Text("A restroom is a public room containing toilets and sinks for personal sanitation. This is Shower room LMAO")
+                    Text(item.description)
                         .font(.system(size: 20))
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color(red: 0.44, green: 0.44, blue: 0.44))
@@ -121,6 +127,28 @@ struct NavImageCard: View {
                 .frame(width: 470)
             }
             .frame(width: 470, height: 770)
+        }
+    }
+    
+    private func getGradientColor(for category: ItemCategory) -> Color {
+        switch category {
+        case .facility:
+            return Color(red: 0, green: 0.43, blue: 0.13)
+        case .office:
+            return Color(red: 0, green: 0.28, blue: 0.43)
+        case .fnb:
+            return Color(red: 0.41, green: 0.43, blue: 0)
+        }
+    }
+    
+    private func getCategoryColor(for category: ItemCategory) -> Color {
+        switch category {
+        case .facility:
+            return Color(red: 0.56, green: 0.93, blue: 0.56)
+        case .office:
+            return Color(red: 0.56, green: 0.78, blue: 0.93)
+        case .fnb:
+            return Color(red: 0.93, green: 0.89, blue: 0.56)
         }
     }
 }
@@ -144,5 +172,5 @@ extension View {
 }
 
 #Preview {
-    NavImageCard()
+    NavImageCard(item: SearchableItem.sampleData().first!)
 }
