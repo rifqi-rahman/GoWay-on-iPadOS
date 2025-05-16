@@ -2,13 +2,10 @@ import SwiftUI
 
 struct LocationCard: View {
     let item: SearchableItem
-    @State private var showNavigation = false
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {
-                showNavigation = true
-            }) {
+            NavigationLink(value: item) {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -49,9 +46,6 @@ struct LocationCard: View {
                 }
             }
             .buttonStyle(.plain)
-            .fullScreenCover(isPresented: $showNavigation) {
-                NavigationView(item: item)
-            }
         }
     }
     

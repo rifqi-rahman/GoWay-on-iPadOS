@@ -24,39 +24,44 @@ struct HomeView: View {
     }
     
     var body: some View {
-        ZStack {
-            // Main content
-            ScrollView {
-                VStack(spacing: 0) {
-                    Header(searchText: $searchText, isSearching: $isSearching)
-                    
-                    if !isSearching {
-                        VStack(alignment: .leading, spacing: 32) {
-                            // Facility and Featured section
-                            HStack(alignment: .top, spacing: 24) {
-                                FacilityCardSection()
-                                FeaturedCard()
+        NavigationStack {
+            ZStack {
+                // Main content
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Header(searchText: $searchText, isSearching: $isSearching)
+                        
+                        if !isSearching {
+                            VStack(alignment: .leading, spacing: 32) {
+                                // Facility and Featured section
+                                HStack(alignment: .top, spacing: 24) {
+                                    FacilityCardSection()
+                                    FeaturedCard()
+                                }
+                                
+                                // Office section
+                                OfficeCardSection()
+                                
+                                // F&B section
+                                FnBCardSection()
                             }
-                            
-                            // Office section
-                            OfficeCardSection()
-                            
-                            // F&B section
-                            FnBCardSection()
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 24)
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 24)
                     }
                 }
-            }
-            .ignoresSafeArea(.all)
-            
-            // Search results overlay
-            if isSearching {
-                Header(searchText: $searchText, isSearching: $isSearching)
+                .ignoresSafeArea(.all)
                 
-                SearchResultsView(searchResults: filteredItems)
-                    .transition(.move(edge: .top))
+                // Search results overlay
+                if isSearching {
+                    Header(searchText: $searchText, isSearching: $isSearching)
+                    
+                    SearchResultsView(searchResults: filteredItems)
+                        .transition(.move(edge: .top))
+                }
+            }
+            .navigationDestination(for: SearchableItem.self) { item in
+                NavigationView(item: item)
             }
         }
         .onChange(of: searchText) { oldValue, newValue in

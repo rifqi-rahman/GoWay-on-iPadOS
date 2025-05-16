@@ -2,12 +2,9 @@ import SwiftUI
 
 struct SearchResultCard: View {
     let item: SearchableItem
-    @State private var showNavigation = false
     
     var body: some View {
-        Button(action: {
-            showNavigation = true
-        }) {
+        NavigationLink(value: item) {
             ZStack {
                 Rectangle()
                     .foregroundColor(.clear)
@@ -69,9 +66,6 @@ struct SearchResultCard: View {
             }
         }
         .buttonStyle(.plain)
-        .fullScreenCover(isPresented: $showNavigation) {
-            NavigationView(item: item)
-        }
     }
     
     private func getGradientColor(for category: ItemCategory) -> Color {

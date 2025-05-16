@@ -13,21 +13,6 @@ struct NavigationView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Back button
-            Button(action: {
-                dismiss()
-            }) {
-                HStack(spacing: 8) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.blue)
-                    
-                    Text("Back")
-                        .font(.system(size: 20, weight: .regular))
-                        .foregroundColor(.blue)
-                }
-            }
-            .padding(.bottom, 24)
             
             // Navigation title
             Text("You're navigating to :")

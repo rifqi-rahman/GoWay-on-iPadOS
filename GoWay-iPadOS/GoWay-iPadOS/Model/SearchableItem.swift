@@ -6,7 +6,7 @@ enum ItemCategory: String {
     case fnb = "F&B"
 }
 
-struct SearchableItem: Identifiable {
+struct SearchableItem: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let category: ItemCategory
@@ -17,6 +17,15 @@ struct SearchableItem: Identifiable {
     // Additional properties specific to each category
     let hasWheelchairAccess: Bool?  // For facilities
     let hasParking: Bool?           // For facilities
+    
+    // Implement Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: SearchableItem, rhs: SearchableItem) -> Bool {
+        lhs.id == rhs.id
+    }
     
     static func sampleData() -> [SearchableItem] {
         return [

@@ -10,16 +10,13 @@ import SwiftUI
 struct FacilityIcons: View {
     var iconName: String
     var iconTitle: String
-    @State private var showNavigation = false
     
     private var facilityItem: SearchableItem {
         SearchableItem.sampleData().first { $0.name == iconTitle }!
     }
     
     var body: some View {
-        Button(action: {
-            showNavigation = true
-        }) {
+        NavigationLink(value: facilityItem) {
             VStack(spacing: 12) {
                 Circle()
                     .fill(Color(red: 0.96, green: 0.96, blue: 0.96))
@@ -39,9 +36,6 @@ struct FacilityIcons: View {
             }
         }
         .buttonStyle(.plain)
-        .fullScreenCover(isPresented: $showNavigation) {
-            NavigationView(item: facilityItem)
-        }
     }
 }
 

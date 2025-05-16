@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FeaturedCard: View {
-    @State private var showNavigation = false
     private let featuredItem = SearchableItem.sampleData().first { $0.name == "Alfamart" }!
     
     var body: some View {
@@ -19,9 +18,7 @@ struct FeaturedCard: View {
                 .padding(.leading, 0)
                 .padding(.top, 0)
             
-            Button(action: {
-                showNavigation = true
-            }) {
+            NavigationLink(value: featuredItem) {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -64,9 +61,6 @@ struct FeaturedCard: View {
                 }
             }
             .buttonStyle(.plain)
-            .fullScreenCover(isPresented: $showNavigation) {
-                NavigationView(item: featuredItem)
-            }
         }
         .padding(.leading, 0)
     }
