@@ -11,7 +11,7 @@ struct HomeView: View {
     @State private var searchText: String = ""
     @State private var isSearching: Bool = false
     private let allItems = SearchableItem.sampleData()
-    
+     
     var filteredItems: [SearchableItem] {
         if searchText.isEmpty {
             return []

@@ -1,13 +1,13 @@
 import Foundation
 
-enum ItemCategory: String {
+enum ItemCategory: String, Codable {
     case facility = "Facility"
     case office = "Office"
     case fnb = "F&B"
 }
 
-struct SearchableItem: Identifiable, Hashable {
-    let id = UUID()
+struct SearchableItem: Identifiable, Hashable, Codable {
+    private(set) var id: UUID
     let name: String
     let category: ItemCategory
     let imageName: String
@@ -17,6 +17,17 @@ struct SearchableItem: Identifiable, Hashable {
     // Additional properties specific to each category
     let hasWheelchairAccess: Bool?  // For facilities
     let hasParking: Bool?           // For facilities
+    
+    init(id: UUID = UUID(), name: String, category: ItemCategory, imageName: String, description: String, operatingHours: String, hasWheelchairAccess: Bool? = nil, hasParking: Bool? = nil) {
+        self.id = id
+        self.name = name
+        self.category = category
+        self.imageName = imageName
+        self.description = description
+        self.operatingHours = operatingHours
+        self.hasWheelchairAccess = hasWheelchairAccess
+        self.hasParking = hasParking
+    }
     
     // Implement Hashable
     func hash(into hasher: inout Hasher) {
@@ -104,3 +115,4 @@ struct SearchableItem: Identifiable, Hashable {
         ]
     }
 } 
+ 

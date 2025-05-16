@@ -76,3 +76,4 @@ struct LocationCard: View {
     LocationCard(item: SearchableItem.sampleData().first!)
         .frame(width: 340, height: 230)
 } 
+ 

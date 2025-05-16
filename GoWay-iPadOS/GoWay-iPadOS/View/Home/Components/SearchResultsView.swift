@@ -125,3 +125,4 @@ struct SearchResultsView: View {
 #Preview {
     SearchResultsView(searchResults: SearchableItem.sampleData())
 } 
+ 

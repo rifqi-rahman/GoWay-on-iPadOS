@@ -24,13 +24,13 @@ struct FacilityIcons: View {
                     .overlay(
                         Image(systemName: iconName)
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(Color(red: 0.02, green: 0.39, blue: 0.13))
+                    .foregroundColor(Color(red: 0.02, green: 0.39, blue: 0.13))
                     )
-                
-                Text(iconTitle)
+            
+            Text(iconTitle)
                     .font(.system(size: 16))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+              .multilineTextAlignment(.center)
+              .foregroundColor(.white)
                     .frame(maxWidth: 80)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -42,32 +42,32 @@ struct FacilityIcons: View {
 struct FacilityCardSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Facility")
-                .font(.title2)
-                .fontWeight(.bold)
+                Text("Facility")
+                    .font(.title2)
+                    .fontWeight(.bold)
                 .padding(.bottom, 14)
-            
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(height: 220)
-                    .background(Color(red: 0.02, green: 0.39, blue: 0.13))
-                    .cornerRadius(16)
                 
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                    .frame(height: 220)
+                        .background(Color(red: 0.02, green: 0.39, blue: 0.13))
+                        .cornerRadius(16)
+                    
                 HStack(alignment: .top, spacing: 0) {
                     Spacer()
-                    FacilityIcons(iconName: "figure.stand.dress.line.vertical.figure", iconTitle: "Restroom")
+                        FacilityIcons(iconName: "figure.stand.dress.line.vertical.figure", iconTitle: "Restroom")
                     Spacer()
-                    FacilityIcons(iconName: "shower.fill", iconTitle: "Shower Room")
+                        FacilityIcons(iconName: "shower.fill", iconTitle: "Shower Room")
                     Spacer()
-                    FacilityIcons(iconName: "car.fill", iconTitle: "Parking Area")
+                        FacilityIcons(iconName: "car.fill", iconTitle: "Parking Area")
                     Spacer()
-                    FacilityIcons(iconName: "door.french.open", iconTitle: "Auditorium")
+                        FacilityIcons(iconName: "door.french.open", iconTitle: "Auditorium")
                     Spacer()
-                    FacilityIcons(iconName: "hands.and.sparkles.fill", iconTitle: "Prayer Room")
+                        FacilityIcons(iconName: "hands.and.sparkles.fill", iconTitle: "Prayer Room")
                     Spacer()
                     FacilityIcons(iconName: "headset", iconTitle: "Front Office")
-                    Spacer()
+            Spacer()
                 }
             }
         }
