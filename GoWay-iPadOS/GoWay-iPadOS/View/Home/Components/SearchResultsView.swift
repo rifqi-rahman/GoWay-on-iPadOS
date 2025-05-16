@@ -106,17 +106,18 @@ struct SearchResultsView: View {
                         .foregroundColor(.gray)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.top, 40)
             } else {
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(searchResults) { item in
-                            SearchResultCard(item: item)
-                        }
+                LazyVStack(spacing: 16) {
+                    ForEach(searchResults) { item in
+                        SearchResultCard(item: item)
                     }
-                    .padding(.horizontal, 24)
                 }
+                .padding(.horizontal, 24)
+                .padding(.top, 16)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color(UIColor.systemBackground))
     }
 }

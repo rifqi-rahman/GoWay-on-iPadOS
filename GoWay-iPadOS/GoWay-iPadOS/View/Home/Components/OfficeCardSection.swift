@@ -58,9 +58,9 @@ struct OfficeCardSection: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Office")
-                .font(.title2)
-                .fontWeight(.bold)
+                Text("Office")
+                    .font(.title2)
+                    .fontWeight(.bold)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
@@ -70,9 +70,9 @@ struct OfficeCardSection: View {
                     }
                 }
             }
-        }
+            }
     }
-}
+    }
 
 #Preview {
     OfficeCardSection()

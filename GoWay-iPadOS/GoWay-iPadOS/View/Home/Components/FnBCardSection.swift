@@ -12,9 +12,9 @@ struct FnBCardSection: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Food & Beverages")
-                .font(.title2)
-                .fontWeight(.bold)
+                Text("Food & Beverages")
+                    .font(.title2)
+                    .fontWeight(.bold)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
@@ -25,7 +25,7 @@ struct FnBCardSection: View {
                 }
             }
         }
-    }
+            }
 }
 
 #Preview {

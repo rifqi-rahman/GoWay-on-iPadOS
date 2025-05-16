@@ -25,13 +25,12 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                // Main content
+            ZStack(alignment: .top) {
                 ScrollView {
                     VStack(spacing: 0) {
-                        Header(searchText: $searchText, isSearching: $isSearching)
-                        
                         if !isSearching {
+                            Header(searchText: $searchText, isSearching: $isSearching)
+                            
                             VStack(alignment: .leading, spacing: 32) {
                                 // Facility and Featured section
                                 HStack(alignment: .top, spacing: 24) {
@@ -46,18 +45,20 @@ struct HomeView: View {
                                 FnBCardSection()
                             }
                             .padding(.horizontal, 24)
-                            .padding(.vertical, 24)
                         }
                     }
                 }
-                .ignoresSafeArea(.all)
                 
-                // Search results overlay
                 if isSearching {
-                    Header(searchText: $searchText, isSearching: $isSearching)
-                    
-                    SearchResultsView(searchResults: filteredItems)
-                        .transition(.move(edge: .top))
+                    VStack(spacing: 0) {
+                        SearchBar(searchText: $searchText, isSearching: $isSearching)
+                        
+                        ScrollView {
+                            SearchResultsView(searchResults: filteredItems)
+                                .transition(.opacity)
+                        }
+                    }
+                    .background(Color(UIColor.systemBackground))
                 }
             }
             .navigationDestination(for: SearchableItem.self) { item in

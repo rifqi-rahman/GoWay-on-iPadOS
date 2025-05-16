@@ -86,28 +86,28 @@ struct NavImageCard: View {
                     
                     // Accessibility icons
                     if item.category == .facility {
-                        HStack(spacing: 40) {
+                    HStack(spacing: 40) {
                             if item.hasWheelchairAccess == true {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.green.opacity(0.2))
-                                        .frame(width: 40, height: 40)
-                                    
-                                    Image(systemName: "figure.roll")
-                                        .font(.system(size: 20))
+                        ZStack {
+                            Circle()
+                                .fill(Color.green.opacity(0.2))
+                                .frame(width: 40, height: 40)
+                            
+                            Image(systemName: "figure.roll")
+                                .font(.system(size: 20))
                                 }
                             }
                             
                             if item.hasParking == true {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.green.opacity(0.2))
-                                        .frame(width: 40, height: 40)
-                                    
-                                    Image(systemName: "p.square.fill")
-                                        .font(.system(size: 20))
-                                }
-                            }
+                        ZStack {
+                            Circle()
+                                .fill(Color.green.opacity(0.2))
+                                .frame(width: 40, height: 40)
+                            
+                            Image(systemName: "p.square.fill")
+                                .font(.system(size: 20))
+                        }
+                    }
                         }
                     }
                     

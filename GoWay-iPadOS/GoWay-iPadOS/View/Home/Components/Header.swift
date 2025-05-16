@@ -12,23 +12,23 @@ struct Header: View {
     @Binding var isSearching: Bool
     
     var body: some View {
-        ZStack { //SEARCHBAR
-            VStack {
-                Image("Hero Banner")
-                    .resizable()
-                    .scaledToFit()
-                    .ignoresSafeArea(edges: .all)
-                    .padding(.vertical, 0)
+            ZStack { //SEARCHBAR
+                VStack {
+                    Image("Hero Banner")
+                        .resizable()
+                        .scaledToFit()
+                        .ignoresSafeArea(edges: .all)
+                        .padding(.vertical, 0)
+                    
+                    Spacer()
+                }
                 
-                Spacer()
-            }
-            
-            VStack {
+                VStack {
                 SearchBar(searchText: $searchText, isSearching: $isSearching)
-                Spacer()
+                    Spacer()
+                }
             }
-        }
-        .padding(.vertical, 1)
+            .padding(.vertical, 1)
     }
 }
 
