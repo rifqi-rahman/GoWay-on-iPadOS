@@ -7,7 +7,7 @@ enum ItemCategory: String, Codable {
 }
 
 struct SearchableItem: Identifiable, Hashable, Codable {
-    private(set) var id: UUID
+    let id: UUID
     let name: String
     let category: ItemCategory
     let imageName: String
@@ -16,7 +16,17 @@ struct SearchableItem: Identifiable, Hashable, Codable {
     
     // Additional properties specific to each category
     let hasWheelchairAccess: Bool?  // For facilities
-    let hasParking: Bool?           // For facilities
+    let hasParking: Bool?          // For facilities
+    
+    // Implement Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // Add CodingKeys and initializer
+    enum CodingKeys: String, CodingKey {
+        case id, name, category, imageName, description, operatingHours, hasWheelchairAccess, hasParking
+    }
     
     init(id: UUID = UUID(), name: String, category: ItemCategory, imageName: String, description: String, operatingHours: String, hasWheelchairAccess: Bool? = nil, hasParking: Bool? = nil) {
         self.id = id
@@ -27,15 +37,6 @@ struct SearchableItem: Identifiable, Hashable, Codable {
         self.operatingHours = operatingHours
         self.hasWheelchairAccess = hasWheelchairAccess
         self.hasParking = hasParking
-    }
-    
-    // Implement Hashable
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: SearchableItem, rhs: SearchableItem) -> Bool {
-        lhs.id == rhs.id
     }
     
     static func sampleData() -> [SearchableItem] {
@@ -115,4 +116,3 @@ struct SearchableItem: Identifiable, Hashable, Codable {
         ]
     }
 } 
- 

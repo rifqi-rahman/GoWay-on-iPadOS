@@ -36,5 +36,51 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB638A3D-6414-4EA8-98D7-0964E34BE82B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoWay-iPadOS/AppIntents/SiriShortcuts.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "SiriShortcutsManager"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "DB638A3D-6414-4EA8-98D7-0964E34BE82B - e7c0c791eab3fc96"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "one-time initialization function for shared"
+                  moduleName = "GoWay-iPadOS.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifqirahman/Documents/GitHub/GoWay-on-iPadOS/GoWay-iPadOS/GoWay-iPadOS/AppIntents/SiriShortcuts.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7">
+               </Location>
+               <Location
+                  uuid = "DB638A3D-6414-4EA8-98D7-0964E34BE82B - b9200a711d15a597"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GoWay_iPadOS.SiriShortcutsManager.shared.unsafeMutableAddressor : GoWay_iPadOS.SiriShortcutsManager"
+                  moduleName = "GoWay-iPadOS.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifqirahman/Documents/GitHub/GoWay-on-iPadOS/GoWay-iPadOS/GoWay-iPadOS/AppIntents/SiriShortcuts.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

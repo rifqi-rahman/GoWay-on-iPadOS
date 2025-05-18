@@ -6,58 +6,80 @@
 //
 
 import SwiftUI
-import AppIntents
+import UIKit
 
 @main
 struct GoWay_iPadOSApp: App {
-    @State private var selectedItem: SearchableItem?
+    @State private var navigationItem: SearchableItem?
+    @Environment(\.scenePhase) private var scenePhase
+    
+    init() {
+        // Donate shortcuts to Siri
+        SiriShortcutsManager.shared.donateRestroomShortcut()
+        SiriShortcutsManager.shared.donateShowerRoomShortcut()
+    }
     
     var body: some Scene {
         WindowGroup {
-            if let item = selectedItem {
-                NavigationView(item: item)
-            } else {
-                HomeView()
-                    .onReceive(NotificationCenter.default.publisher(for: Notification.Name("NavigateToLocation"))) { notification in
-                        if let item = notification.userInfo?["item"] as? SearchableItem {
-                            selectedItem = item
-                        }
+            ContentView(navigationItem: $navigationItem)
+                .onOpenURL { url in
+                    handleIncomingURL(url)
+                }
+                .onContinueUserActivity("com.goway.ipadapp.navigateToRestroom") { userActivity in
+                    if let item = SiriShortcutsManager.shared.handleShortcut(activity: userActivity) {
+                        navigationItem = item
                     }
+                }
+                .onContinueUserActivity("com.goway.ipadapp.navigateToShowerRoom") { userActivity in
+                    if let item = SiriShortcutsManager.shared.handleShortcut(activity: userActivity) {
+                        navigationItem = item
+                    }
+                }
+        }
+        .handlesExternalEvents(matching: ["com.goway.ipadapp.navigateToRestroom", "com.goway.ipadapp.navigateToShowerRoom"])
+    }
+    
+    // Handle incoming URLs or user activities
+    private func handleIncomingURL(_ url: URL) {
+        // Check if the URL matches our shortcuts
+        if url.absoluteString.contains("navigateToRestroom") {
+            if let item = SearchableItem.sampleData().first(where: { $0.name == "Restroom" }) {
+                navigationItem = item
             }
-        }
-        .commands {
-            // Add Siri command support
-            CommandsBuilder.buildCommands()
-        }
-        .appShortcuts {
-            // Register app shortcuts
-            NavigateToLocationShortcuts.appShortcuts
+        } else if url.absoluteString.contains("navigateToShowerRoom") {
+            if let item = SearchableItem.sampleData().first(where: { $0.name == "Shower Room" }) {
+                navigationItem = item
+            }
         }
     }
 }
 
-// Helper to build Siri commands
-struct CommandsBuilder {
-    static func buildCommands() -> Commands {
-        Commands {
-            SidebarCommands()
-            
-            // Add navigation commands
-            CommandGroup(after: .newItem) {
-                Button("Navigate to Restroom") {
-                    Task {
-                        try? await NavigateToLocationIntent(location: .restroom).perform()
+// ContentView to handle state and events
+struct ContentView: View {
+    @Binding var navigationItem: SearchableItem?
+    
+    var body: some View {
+        if let item = navigationItem {
+            NavigationView(item: item)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Back to Home") {
+                            navigationItem = nil
+                        }
                     }
                 }
-                .keyboardShortcut("R", modifiers: [.command, .shift])
-                
-                Button("Navigate to Shower Room") {
-                    Task {
-                        try? await NavigateToLocationIntent(location: .showerRoom).perform()
+        } else {
+            HomeView()
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("NavigateToLocation"))) { notification in
+                    if let item = notification.userInfo?["item"] as? SearchableItem {
+                        navigationItem = item
                     }
                 }
-                .keyboardShortcut("S", modifiers: [.command, .shift])
-            }
         }
     }
 }
+
+
+
+
+

@@ -10,8 +10,9 @@ import SwiftUI
 struct HomeView: View {
     @State private var searchText: String = ""
     @State private var isSearching: Bool = false
+    @State private var navigationItem: SearchableItem?
     private let allItems = SearchableItem.sampleData()
-     
+    
     var filteredItems: [SearchableItem] {
         if searchText.isEmpty {
             return []
@@ -28,26 +29,26 @@ struct HomeView: View {
             ZStack(alignment: .top) {
                 // Main content
                 if !isSearching {
-                    ScrollView {
+                ScrollView {
                         VStack(spacing: 0) {
                             Header(searchText: $searchText, isSearching: $isSearching)
                             
                             VStack(alignment: .leading, spacing: 32) {
                                 // Facility and Featured section
                                 HStack(alignment: .top, spacing: 24) {
-                                    FacilityCardSection()
-                                    FeaturedCard()
-                                }
+                            FacilityCardSection()
+                            FeaturedCard()
+                        }
                                 
                                 // Office section
-                                OfficeCardSection()
+                        OfficeCardSection()
                                 
                                 // F&B section
-                                FnBCardSection()
+                        FnBCardSection()
                             }
                             .padding(.horizontal, 24)
-                        }
                     }
+                }
                 } else {
                     // Search view
                     VStack(spacing: 0) {
@@ -66,6 +67,28 @@ struct HomeView: View {
         }
         .onChange(of: searchText) { oldValue, newValue in
             isSearching = !newValue.isEmpty
+        }
+        .onAppear {
+            // Listen for Siri shortcut notifications
+            NotificationCenter.default.addObserver(
+                forName: Notification.Name("NavigateToLocation"),
+                object: nil,
+                queue: .main
+            ) { notification in
+                if let item = notification.userInfo?["item"] as? SearchableItem {
+                    navigationItem = item
+                }
+            }
+        }
+        .sheet(item: $navigationItem) { item in
+            NavigationView(item: item)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Done") {
+                            navigationItem = nil
+                        }
+                    }
+                }
         }
     }
 }
