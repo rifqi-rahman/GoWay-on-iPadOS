@@ -5,7 +5,7 @@
 
 
 [![SwiftUI](https://img.shields.io/badge/SwiftUI-Native%20iOS%20Framework-orange.svg?style=flat-square)](https://developer.apple.com/xcode/swiftui/)
-[![AppIntent](https://img.shields.io/badge/AppIntent-Apple%20Maps%20Integration-blue.svg?style=flat-square)](https://developer.apple.com/documentation/appintent)
+[![AppIntent](https://img.shields.io/badge/AppIntent-Apple%20Intent%20Integration-blue.svg?style=flat-square)](https://developer.apple.com/documentation/appintent)
 ![No Internet Required](https://img.shields.io/badge/Offline-Functionality-lightgrey.svg?style=flat-square)
 
 
