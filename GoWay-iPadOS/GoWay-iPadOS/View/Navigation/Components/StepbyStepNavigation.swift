@@ -16,6 +16,7 @@ struct StepbyStepNavigation: View {
                 ForEach(navigationStep) { step in
                     StepCard(navigationStep: step)
                 }
+                ArrivedStepCard()
             }
         }
         .scrollIndicators(.hidden)

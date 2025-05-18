@@ -55,12 +55,6 @@ class NavigationDataRestroom: NavigationDataProvider {
                 title: "Turn Right",
                 description: "Now, You'll see the restroom's sign on the right",
                 imageName: "restroom_step5"
-            ),
-            NavigationStep(
-                stepNumber: 6,
-                title: "You're Arrived!",
-                description: "Now, Have a nice rest!",
-                imageName: ""
             )
         ]
     }
@@ -99,12 +93,6 @@ class NavigationDataShower: NavigationDataProvider {
                 title: "Turn Right",
                 description: "Now, Turn Right",
                 imageName: "shower_step5"
-            ),
-            NavigationStep(
-                stepNumber: 6,
-                title: "You're Arrived!",
-                description: "Now, Have a nice rest!",
-                imageName: ""
             )
         ]
     }
@@ -116,6 +104,24 @@ class NavigationDataComingSoon: NavigationDataProvider {
         return [
             NavigationStep(
                 stepNumber: 1,
+                title: "Coming Soon",
+                description: "Navigation steps for this location are coming soon!",
+                imageName: "coming_soon"
+            ),
+            NavigationStep(
+                stepNumber: 2,
+                title: "Coming Soon",
+                description: "Navigation steps for this location are coming soon!",
+                imageName: "coming_soon"
+            ),
+            NavigationStep(
+                stepNumber: 3,
+                title: "Coming Soon",
+                description: "Navigation steps for this location are coming soon!",
+                imageName: "coming_soon"
+            ),
+            NavigationStep(
+                stepNumber: 4,
                 title: "Coming Soon",
                 description: "Navigation steps for this location are coming soon!",
                 imageName: "coming_soon"

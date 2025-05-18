@@ -40,7 +40,7 @@ struct SearchResultCard: View {
                         
                         // Title
                         Text(item.name)
-                            .font(.system(size: 24, weight: .bold))
+                            .font(Font.custom("Bebas Neue", size: 32))
                             .foregroundColor(.white)
                         
                         // Description
@@ -48,20 +48,25 @@ struct SearchResultCard: View {
                             .font(.system(size: 14))
                             .foregroundColor(.white.opacity(0.8))
                             .lineLimit(2)
+                        
+                        // Operating hours
+                        
+                        HStack(alignment: .top) {
+                            Image(systemName: "clock")
+                                .foregroundColor(.white)
+                            Text(item.operatingHours)
+                                .font(.system(size: 14))
+                                .foregroundColor(.white)
+                        }
+                        .frame(height: 32)
+                        .padding(.top, 30)
                     }
                     .padding(.leading, 20)
                     
                     Spacer()
                     
-                    // Operating hours
-                    VStack(alignment: .trailing) {
-                        Image(systemName: "clock")
-                            .foregroundColor(.white)
-                        Text(item.operatingHours)
-                            .font(.system(size: 14))
-                            .foregroundColor(.white)
-                    }
-                    .padding(.trailing, 20)
+                   
+                    
                 }
             }
         }
